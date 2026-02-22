@@ -4,20 +4,26 @@
 # Static Website Hosting on AWS S3 Using Terraform
 
 This project demonstrates how to deploy a **static website** (HTML + CSS) to an **Amazon S3 bucket** using Terraform.  
-You only need to update three components before deployment:
+Before deploying, you will need to update:
 
 1. **Terraform variables**  
 2. **index.html**  
 3. **styles.css**
+
+For AWS website hosting permissions, refer to the official documentation:  
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteAccessPermissionsReqd.html
+
+If you need to convert an IAM JSON policy into Terraform HCL format, you can use this tool:  
+https://flosell.github.io/iam-policy-json-to-terraform/
 
 ---
 
 ## 📌 Overview
 
 - Creates an S3 bucket configured for **static website hosting**
-- Uploads your `index.html` and `styles.css` files
-- Bucket policy allows public read access (optional based on your setup)
-- All custom values are managed through the **variables file**
+- Uploads your HTML and CSS files to the bucket
+- Applies a bucket policy to allow public read access (optional based on your requirements)
+- All custom values are controlled through the **variables file**
 
 ---
 
@@ -34,7 +40,7 @@ variable "region" {
 }
 
 variable "bucket_name" {
-  description = "Name of the S3 bucket for static hosting"
+  description = "S3 bucket name for static website hosting"
   type        = string
 }
 
@@ -44,7 +50,7 @@ variable "tags" {
 }
 ```
 
-Be sure to update:
+You must update:
 
 - **region**
 - **bucket_name**
@@ -66,7 +72,7 @@ Example:
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Hello from S3 Static Hosting!</h1>
+    <h1>Welcome to My S3 Static Website</h1>
 </body>
 </html>
 ```
@@ -75,15 +81,16 @@ Example:
 
 ### 3. Update `styles.css`
 
-Customize your website’s styling.
+Customize the styling for your website.
 
 Example:
 
 ```css
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f2f2f2;
     text-align: center;
+    padding-top: 50px;
 }
 ```
 
@@ -99,8 +106,7 @@ terraform plan
 terraform apply
 ```
 
-Once applied, Terraform will output the **S3 website endpoint URL** where your static site is hosted.
+After deployment, Terraform will output the **S3 website endpoint URL** where your static site is hosted.
 
 ---
-
 
