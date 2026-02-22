@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "s3bucket" {
-    bucket = "aws-s3-bucket-32123454323"
+    bucket = var.s3_bucket
     tags = merge(
     var.region_tags,
     {

@@ -15,7 +15,11 @@ variable "region_tags" {
   }
 }
 
-
+variable "s3_bucket"{
+  default = "aws-s3-bucket-32123454323"
+  type = string
+  
+}
 
 
 
